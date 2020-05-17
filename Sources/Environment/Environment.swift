@@ -5,6 +5,7 @@ import Darwin
 #endif
 import CEnvironment
 
+var env1 = CEnvironment.environ
 public struct Environment {
 
     public init() { }
@@ -42,14 +43,13 @@ public struct Environment {
     /// Returns the dictionary of all environment variables, keyed by their name.
     /// Note that some values might be empty strings, as that is valid in the environment.
     public func all() -> [String: String] {
-        var env = environ
+        var env = env1
         var pairs: [String: String] = [:]
         while let cpair = env?.pointee {
             defer { env = env?.successor() }
 
             let pairString = String(cString: cpair)
             let pair = pairString
-                .characters
                 .split(separator: "=", maxSplits: 2, omittingEmptySubsequences: false)
                 .map(String.init)
 
@@ -62,3 +62,4 @@ public struct Environment {
 }
 
 public let Env = Environment()
+
