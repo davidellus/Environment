@@ -1,3 +1,4 @@
+
 // swift-tools-version:5.2
 import PackageDescription
 
@@ -6,6 +7,9 @@ let package = Package(
   platforms: [
      .macOS(.v10_15)
   ],
+  products: [
+    .library(name: "Environment", targets: ["Environment"]),
+    ],
 
   targets: [
     //C helpers
@@ -15,6 +19,8 @@ let package = Package(
     .target(name: "Environment", dependencies: [
         .target(name: "CEnvironment"),
     ]),
+    .testTarget(name: "EnvironmentTests", dependencies: [
+            .target(name: "Environment"),
+        ]),
     ]
 )
-

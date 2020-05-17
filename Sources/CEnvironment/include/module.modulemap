@@ -1,0 +1,4 @@
+module CEnvironment [system][extern_c] {
+ header "../env.h"
+ export *
+}
